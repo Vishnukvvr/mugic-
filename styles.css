@@ -1,0 +1,70 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background:linear-gradient(0deg,pink,green,yellow);
+    font-family: monospace;
+}
+.container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.mugic-player{
+    border: 0;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+    padding: 20px;
+    width: 250px;
+    height: 400px;
+    background: rgba(0, 0, 0, 0.159);
+}
+input[type="range"] {
+    -webkit-appearance: none;
+    margin-right: 15px;
+    width: 200px;
+    height: 7px;
+    background: rgb(29, 29, 29);
+    border-radius: 5px;
+    background-size: 70% 100%;
+    background-repeat: no-repeat;
+  }
+  
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 10px;
+    width: 10px;
+    border: 10px solid rgb(250, 246, 57);
+    border-radius: 50%;
+    cursor: ew-resize;
+    box-shadow: 0 0 2px 0 #555;
+  }
+  .mugic-player h1{
+    text-align: center;
+    margin: 10px;
+    font-size: 2rem;
+    font-weight: lighter;
+  }
+  .mugic-player img{
+    border: 7px solid yellow;
+    border-radius: 100px;
+  }
+  .btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .fa-solid{
+    font-size: 3rem;
+    color:pink;
+    margin: 20px;
+  }
+  .btns li{
+    list-style: none;
+  }
+  

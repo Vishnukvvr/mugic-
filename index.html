@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="mugic-player">
+            <img src="song1.jfif" alt="Album Art" id="album-art" width="200" height="200">
+            <h1 id="song-title">song1</h1>
+            <div class="mugic">
+                <audio id="audio">
+                    <source src="song1.mp3" type="audio/mpeg">
+                </audio>
+                <input type="range" id="range" min="0" max="100" value="0">
+            </div>
+            <div class="btns">
+              <li> <i class="fa-solid fa-caret-left" id="prev"></i></li> 
+              <li>  <i class="fa-solid fa-play" id="play-pause"></i></li> 
+              <li> <i class="fa-solid fa-caret-right" id="next"></i></li> 
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const songs = [
+            {file: "song1.mp3", image: "song1.jfif", title: "DANDELIONS"},
+            {file: "song2.mp3", image: "song2.jfif", title: "BUILDING LIGHTS"},
+            {file: "song3.flac", image: "song3.jfif", title: "INTERSTELLAR"},
+            {file: "song4.mp3", image: "song4.jfif", title: "SANJU"},
+            {file: "song5.mp3", image: "song5.jfif", title: "DAVARA"},
+
+
+
+        ];
+
+        let currentSongIndex = 0;
+        const audio = document.getElementById('audio');
+        const albumArt = document.getElementById('album-art');
+        const songTitle = document.getElementById('song-title');
+        const playPauseBtn = document.getElementById('play-pause');
+        const prevBtn = document.getElementById('prev');
+        const nextBtn = document.getElementById('next');
+        const range = document.getElementById('range');
+        let isPlaying = false;
+
+        function loadSong(song) {
+            audio.src = song.file;
+            albumArt.src = song.image;
+            songTitle.textContent = song.title;
+            audio.load();
+        }
+
+        playPauseBtn.addEventListener('click', function() {
+            if (isPlaying) {
+                audio.pause();
+                playPauseBtn.classList.replace('fa-pause', 'fa-play');
+            } else {
+                audio.play();
+                playPauseBtn.classList.replace('fa-play', 'fa-pause');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        nextBtn.addEventListener('click', function() {
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            loadSong(songs[currentSongIndex]);
+            if (isPlaying) {
+                audio.play();
+            }
+        });
+
+        prevBtn.addEventListener('click', function() {
+            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            loadSong(songs[currentSongIndex]);
+            if (isPlaying) {
+                audio.play();
+            }
+        });
+
+        audio.addEventListener('timeupdate', function() {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            range.value = progress || 0;  
+        });
+
+      
+        range.addEventListener('input', function() {
+            const seekTime = (range.value / 100) * audio.duration;
+            audio.currentTime = seekTime;
+        });
+
+        loadSong(songs[currentSongIndex]);
+    </script>
+</body>
+</html>
